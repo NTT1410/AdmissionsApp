@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3cdb9322-37da-4eaa-be01-f2b6ca04c6b1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/admissions/dao.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/admissions/paginator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/admissions/perms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/admissions/serializer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/admissions/static/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/admissions/templates/admin/stats_view.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/admissions/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
