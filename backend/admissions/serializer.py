@@ -46,7 +46,7 @@ class AdmissionsSerializerDetail(AdmissionsSerializer):
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'password', 'email', 'avatar']
+        fields = ['id','first_name', 'last_name', 'username', 'password', 'email', 'avatar']
         extra_kwargs = {
             'password': {
                 'write_only': True
@@ -57,6 +57,7 @@ class UserSerializer(ModelSerializer):
         data = validated_data.copy()
         user = User(**data)
         user.set_password(data['password'])
+        print(user.avatar)
         user.save()
 
         return user
@@ -82,13 +83,13 @@ class StreamSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class DepartmentSerializer(BaseSerializer):
+class DepartmentSerializer(ModelSerializer):
     class Meta:
         model = Department
         fields = '__all__'
 
 
-class ScoreSerializer(BaseSerializer):
+class ScoreSerializer(ModelSerializer):
     class Meta:
         model = Score
         fields = '__all__'
@@ -109,7 +110,11 @@ class FAQSerializer(ModelSerializer):
         fields = '__all__'
 
 
+
+
 class CommentSerializer(serializers.ModelSerializer):
+    user = UserSerializer(many=False)
+
     class Meta:
         model = Comment
-        fields = ['id', 'content']
+        fields = ['id', 'content', 'created_date', 'user']

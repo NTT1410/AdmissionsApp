@@ -5,8 +5,12 @@ from django.template.response import TemplateResponse
 from django.urls import path
 from django.utils.html import mark_safe
 
-from .dao import count_admissions_by_cate
-from .models import Admissions, Category, User, Banner, Department, FAQ, Score, Answer, Question, School, Stream, Comment, Like
+from .dao import count_admissions_by_cate, count_banner, count_admissions, ratio_admissions, current_admissions, \
+    previous_admissions, count_user, ratio_banners
+from .models import Admissions, Category, User, Banner, Department, FAQ, Score, Answer, Question, School, Stream, \
+    Comment, Like
+
+from datetime import date
 
 
 class AdmissionsAppAdminSite(admin.AdminSite):
@@ -19,8 +23,22 @@ class AdmissionsAppAdminSite(admin.AdminSite):
 
     def stats_view(self, request):
         stats = count_admissions_by_cate()
+        banner_on = count_banner()
+        admissions = count_admissions()
+        r_admissions = ratio_admissions()
+        c_admissions = current_admissions()
+        p_admissions = previous_admissions()
+        users = count_user()
+        r_banners = ratio_banners()
         return TemplateResponse(request, 'admin/stats_view.html', {
-            'stats': stats
+            'stats': stats,
+            'banner_on': banner_on,
+            'admissions': admissions,
+            'r_admissions': r_admissions,
+            'c_admissions': c_admissions,
+            'p_admissions': p_admissions,
+            'users': users,
+            'r_banners': r_banners,
         })
 
 
@@ -99,8 +117,12 @@ class StreamAdmin(admin.ModelAdmin):
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'status', 'content']
-    search_fields = ['name']
+    list_display = ['id', 'status', 'content']
+
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['id', 'content', 'user']
+    search_fields = ['user']
 
 
 admin_site = AdmissionsAppAdminSite(name="myapp")
@@ -116,5 +138,5 @@ admin_site.register(Answer)
 admin_site.register(Question, QuestionAdmin)
 admin_site.register(School)
 admin_site.register(Stream, StreamAdmin)
-admin_site.register(Comment)
+admin_site.register(Comment, CommentAdmin)
 admin_site.register(Like)

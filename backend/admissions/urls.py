@@ -15,8 +15,11 @@ router.register(r'questions', views.QuestionViewSet)
 router.register(r'faqs', views.FAQViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'comments', views.CommentViewSet)
+router.register(r'messages', views.MessageViewSet, basename="messages")
 
 urlpatterns = [
+    path('index/', views.index, name='index'),
     path('', include(router.urls)),
     path('admin/', admin_site.urls),
+    path('postfb/', views.test)
 ]

@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from oauth2_provider.views import ProtectedResourceView
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -35,6 +36,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('', include('admissions.urls')),
     # path('admin/', admin.site.urls),
+    path('api/hello', ProtectedResourceView.as_view()),
     path('o/', include('oauth2_provider.urls',
                        namespace='oauth2_provider')),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),

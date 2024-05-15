@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'corsheaders',
-    'oauth2_provider'
+    'oauth2_provider',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +63,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+import firebase_admin
+from firebase_admin import credentials
+
+cred = credentials.Certificate(BASE_DIR / "path/to/serviceAccountKey.json")
+firebase_admin.initialize_app(cred)
+
 import cloudinary
 
 cloudinary.config(
@@ -69,6 +76,7 @@ cloudinary.config(
     api_key="922715196169483",
     api_secret="6aAwF93sl_NCV09wT6xF0UNDVbU"
 )
+
 CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = 'backend.urls'
 AUTH_USER_MODEL = 'admissions.User'
@@ -76,7 +84,7 @@ AUTH_USER_MODEL = 'admissions.User'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
